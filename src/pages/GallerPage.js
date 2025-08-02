@@ -1,6 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 // pages/GalleryPage.js
-import React from "react";
+import React, { useState } from "react";
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
 
 const images = [
   "/gallery/1.png",
@@ -14,6 +16,8 @@ const images = [
 ];
 
 export default function GalleryPage() {
+  const [index, setIndex] = useState(-1);
+
   return (
     <div className="min-h-screen bg-white px-4 py-12">
       <div className="max-w-7xl mx-auto text-center mb-6">
@@ -21,7 +25,7 @@ export default function GalleryPage() {
         <p className="text-gray-600 mt-2">Explore the colors we bring to life</p>
       </div>
 
-      {/* New Descriptive Text Section */}
+      {/* Descriptive Text */}
       <div className="max-w-3xl mx-auto text-center mb-10">
         <p className="text-gray-700 text-lg leading-relaxed">
           At Loop and Love, we pour creativity and craftsmanship into every thread. 
@@ -33,22 +37,31 @@ export default function GalleryPage() {
 
       {/* Image Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {images.map((src, index) => (
+        {images.map((src, idx) => (
           <div
-            key={index}
-            className="overflow-hidden rounded-lg shadow-md group relative"
+            key={idx}
+            className="overflow-hidden rounded-lg shadow-md group relative cursor-pointer"
+            onClick={() => setIndex(idx)}
           >
             <img
               src={src}
-              alt={`Gallery ${index + 1}`}
+              alt={`Gallery ${idx + 1}`}
               className="w-full h-64 object-cover transform group-hover:scale-105 transition duration-300"
             />
             <div className="absolute inset-0 bg-black bg-opacity-30 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center text-white text-lg font-semibold">
-              Photo {index + 1}
+              Photo {idx + 1}
             </div>
           </div>
-        ))} 
+        ))}
       </div>
+
+      {/* Lightbox */}
+      <Lightbox
+        open={index >= 0}
+        close={() => setIndex(-1)}
+        index={index}
+        slides={images.map((src) => ({ src }))}
+      />
     </div>
   );
 }
