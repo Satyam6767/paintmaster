@@ -105,7 +105,7 @@ export default function BlogPage() {
 
           {/* Closing Paragraph */}
           <p className="mt-14 text-center text-lg text-gray-700 max-w-4xl mx-auto">
-            At Paint Master, we believe every wall has a story waiting to be told. From 
+            At Paint Masters, we believe every wall has a story waiting to be told. From 
             classic neutrals to bold statement shades, our blog is your guide to turning your 
             vision into reality. Keep exploring, stay inspired, and remember — a brush of color 
             can go a long way!
